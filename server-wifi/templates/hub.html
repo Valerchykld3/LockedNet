@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>LockedNet - Hub Info</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Hub Info</h1>
+        <p class="subtitle">Manage main central</p>
+        
+        <form method="POST" action="/hub">
+            <button type="submit" name="hub_action" value="hub|Buzz|wifi">Buzz</button>
+            <button type="submit" name="hub_action" value="hub|Charge|wifi">Hub charge</button>
+            <button type="submit" name="hub_action" value="hub|Connecting|wifi">Check PC connection</button>
+            <button type="submit" name="hub_action" value="hub|Time|wifi">Check the time</button>
+            <button type="submit" name="hub_action" value="hub|OLED|wifi">OLED ON</button>
+        </form>
+
+        {% if message %}
+            <p class="success">{{ message }}</p>
+        {% endif %}
+        {% if serial_error %}
+            <p class="error">{{ serial_error }}</p>
+        {% endif %}
+        
+        <a href="{{ url_for('menu') }}" class="btn" style="margin-top: 25px;">Back to Menu</a>
+    </div>
+</body>
+</html>

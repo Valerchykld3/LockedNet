@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>LockedNet - AntiBlackout</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>AntiBlackout Protocol</h1>
+        <p class="subtitle">Activate or deactivate the protocol</p>
+        
+        <form method="POST" action="/abprotocol.html" class="settings-form">
+            <!-- Перемикач -->
+            <div class="form-group" id="status_group">
+                <label>Protocol Status</label>
+                <button type="submit" name="ab_action" value="Ud|alarm|beacon" class="btn btn-on" id="btn_on">Turn ON</button>
+                <button type="submit" name="ab_action" value="Ud|sleep|beacon" class="btn btn-off">Turn OFF</button>
+            </div>
+        
+            <!-- Частоти перевірок -->
+            <div class="form-group">
+                <label for="ups_interval">UPS Check Interval (min)</label>
+                <input type="number" id="ups_interval" name="ups_interval" value="5" min="1">
+                <button type="submit" name="ab_action" formaction="/abprotocol.html?action=set_ups_interval"
+                    class="btn">Set</button>
+            </div>
+            <div class="form-group">
+                <label for="meteo_interval">Meteo Check Interval (min)</label>
+                <input type="number" id="meteo_interval" name="meteo_interval" value="10" min="1">
+                <button type="submit" name="ab_action" formaction="/abprotocol.html?action=set_meteo_interval"
+                    class="btn">Set</button>
+            </div>
+        
+            <!-- Порогові значення -->
+            <div class="form-group">
+                <label for="min_temp">Min Temperature (°C)</label>
+                <input type="number" id="min_temp" name="min_temp" value="15" step="0.5">
+                <button type="submit" name="ab_action" formaction="/abprotocol.html?action=set_min_temp"
+                    class="btn">Set</button>
+            </div>
+            <div class="form-group">
+                <label for="max_hum">Max Humidity (%)</label>
+                <input type="number" id="max_hum" name="max_hum" value="60" min="0" max="100">
+                <button type="submit" name="ab_action" formaction="/abprotocol.html?action=set_max_hum" class="btn">Set</button>
+            </div>
+            <div class="form-group">
+                <label for="max_co2">Max CO2 (ppm)</label>
+                <input type="number" id="max_co2" name="max_co2" value="1000" min="400" step="50">
+                <button type="submit" name="ab_action" formaction="/abprotocol.html?action=set_max_co2" class="btn">Set</button>
+            </div>
+        </form>
+        
+        <p id="feedbackText" class="success" style="min-height: 24px; text-align: center; margin-top: 15px;"></p>
+
+        <a href="/menu.html" class="btn" style="margin-top: 25px;">Back to Menu</a>
+    </div>
+
+    <script src="/script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', '/abprotocol.html', true);
+            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+            
+            xhr.onload = function() {
+                setTimeout(fetchSettingsFeedback, 1500);
+            };
+            
+            xhr.send('ab_action=1|abp_get_settings|beacon');
+        });
+
+        function fetchSettingsFeedback() {
+            fetch('/api/feedback')
+                .then(response => response.text())
+                .then(text => {
+                    if (text.startsWith('ABP_SETTINGS:')) {
+                        const parts = text.substring(13).split('|');
+                        if (parts.length === 6) {
+                            const isActive = parts[0] === '1';
+                            
+                            document.getElementById('status_group').classList.toggle('active', isActive);
+
+                            document.getElementById('ups_interval').value = parts[1];
+                            document.getElementById('meteo_interval').value = parts[2];
+                            document.getElementById('min_temp').value = parts[3];
+                            document.getElementById('max_hum').value = parts[4];
+                            document.getElementById('max_co2').value = parts[5];
+                        }
+                    }
+                });
+        }
+    </script>
+</body>
+</html>

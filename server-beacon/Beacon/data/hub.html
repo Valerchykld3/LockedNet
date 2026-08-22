@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>LockedNet - Hub Info</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Hub Info</h1>
+        <p class="subtitle">Manage main central</p>
+        
+        <form method="POST" action="/hub.html">
+            <button type="submit" name="hub_action" value="hub|Buzz|beacon">Buzz</button>
+            <button type="submit" name="hub_action" value="hub|Charge|beacon">Hub charge</button>
+            <button type="submit" name="hub_action" value="hub|Connecting|beacon">Check PC connection</button>
+            <button type="submit" name="hub_action" value="hub|Time|beacon">Check the time</button>
+            <button type="submit" name="hub_action" value="hub|OLED|beacon">OLED ON</button>
+        </form>
+        
+        <p id="feedbackText" class="success" style="min-height: 24px; text-align: center; margin-top: 15px;"></p>
+
+        <a href="/menu.html" class="btn" style="margin-top: 25px;">Back to Menu</a>
+    </div>
+
+    <script src="/script.js"></script>
+</body>
+</html>

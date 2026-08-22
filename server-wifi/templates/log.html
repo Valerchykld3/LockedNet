@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>LockedNet - Logs</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>System Logs</h1>
+        <p class="subtitle">Last activities</p>
+        
+        <div class="log-box">
+            {% if logs %}
+                {% for line in logs %}
+                    <p>{{ line }}</p>
+                {% endfor %}
+            {% else %}
+                <p>Log is empty.</p>
+            {% endif %}
+        </div>
+
+        <a href="{{ url_for('menu') }}" class="btn" style="margin-top: 25px;">Back to Menu</a>
+    </div>
+</body>
+</html>

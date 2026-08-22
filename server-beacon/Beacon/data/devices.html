@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>LockedNet - Home Devices</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Home Devices</h1>
+        <p class="subtitle">Select module to activate</p>
+        
+        <form method="POST" action="/devices.html">
+            <button type="submit" name="device_action" value="bD|Boil|beacon">Boil the water</button>
+            <button type="submit" name="device_action" value="mD|Measure|beacon">Measure the air</button>
+            <button type="submit" name="device_action" value="Ud|Voltage|beacon">Check voltage</button>
+            <button type="submit" name="device_action" value="eH|Fresh|beacon">Fresh air</button>
+            <button type="submit" name="device_action" value="eH|Humidify|beacon">Humidify the air</button>
+            <button type="submit" name="device_action" value="eH|Warm|beacon">Warm the room</button>
+        </form>
+        
+        <p id="feedbackText" class="success" style="min-height: 24px; text-align: center; margin-top: 15px;"></p>
+
+        <a href="/menu.html" class="btn" style="margin-top: 25px;">Back to Menu</a>
+    </div>
+
+    <script src="/script.js"></script>
+</body>
+</html>

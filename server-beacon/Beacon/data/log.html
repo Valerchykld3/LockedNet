@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>LockedNet - Logs</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>System Logs</h1>
+        <p class="subtitle">Request logs from the Hub</p>
+        
+        <form method="POST" action="/log.html">
+            <button type="submit" name="log_action" value="1|log|beacon" style="margin-bottom: 15px;">Request Logs</button>
+        </form>
+
+        <div class="log-box">
+            <!-- Оскільки ESP32 не розуміє Jinja, лог будемо підставляти через C++ код -->
+            <p>Press "Request Logs" to fetch data from Hub.</p>
+        </div>
+
+        <a href="/menu.html" class="btn" style="margin-top: 25px;">Back to Menu</a>
+    </div>
+
+    <script src="/script.js"></script>
+</body>
+</html>

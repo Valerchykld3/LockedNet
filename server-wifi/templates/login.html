@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>LockedNet Login</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <div class="container">
+        <h1>(Not) Welcome to LockedNet</h1>
+        <p class="subtitle">We work on XXX channel</p>
+
+        <form method="POST" action="/">
+            <input type="text" name="username" placeholder="Login" required autocomplete="off">
+            <input type="password" name="password" placeholder="Password" required>
+            <button type="submit">Access</button>
+        </form>
+
+        {% if error %}
+            <p class="error">{{ error }}</p>
+        {% endif %}
+    </div>
+
+</body>
+</html>

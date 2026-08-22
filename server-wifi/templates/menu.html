@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>LockedNet - Menu</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <!-- <h1>(Not) Welcome to LockedNet</h1> -->
+        <h1>What do you want?</h1>
+        <a href="{{ url_for('devices') }}" class="btn">Home devices</a>
+        <a href="{{ url_for('hub') }}" class="btn">Hub info</a>
+        <a href="{{ url_for('maintaince') }}" class="btn">Chatting</a>
+        <a href="{{ url_for('log') }}" class="btn">Log</a>
+        <a href="{{ url_for('abprotocol') }}" class="btn">AntiBlackout protocol</a>
+        <a href="{{ url_for('logout') }}" class="btn" style="border-color: #ff3333; margin-top: 30px;">Logout</a>
+    </div>
+</body>
+</html>

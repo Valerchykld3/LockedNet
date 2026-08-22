@@ -1,0 +1,12 @@
+# LockedNet: energyHub
+
+## ⚠️ Development Status: Hardware First (Alpha Version)
+
+In this Alpha release of LockedNet, the software (C++ firmware) for the `energyHub` has been intentionally omitted.
+
+**Why is the code missing?**
+The `energyHub` is the primary executive module of the ecosystem — a complex "all-in-one" device powered by an external 12V battery, designed to manage heating (PTC), piezo-humidification, ventilation, and PWM-controlled adaptive lighting[cite: 5]. Given its heavy-duty nature and complexity, the hardware architecture is currently in a highly volatile state and will likely undergo significant changes before the final physical assembly.
+
+Experience with earlier modules has shown that writing firmware for a fluid hardware design inevitably leads to scrapping and rewriting the entire software stack from scratch later on. To avoid redundant work, software development for the `energyHub` is currently on hold.
+
+The C++ codebase will be introduced to this repository only after the physical hardware prototype is fully assembled, tested, and strictly finalized.

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>LockedNet - AntiBlackout</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}?v=2"></head>
+<body>
+    <div class="container">
+        <h1>AntiBlackout Protocol</h1>
+        <p class="subtitle">Activate or deactivate the protocol</p>
+        
+        <form method="POST" action="/abprotocol" class="settings-form">
+            <!-- Головний перемикач -->
+            <div class="form-group input-group">
+                <label>Protocol Status: <strong>{{ status }}</strong></label>
+                <button type="submit" name="ab_action" value="Ud|alarm|wifi" class="btn btn-on">Turn ON</button>
+                <button type="submit" name="ab_action" value="Ud|sleep|wifi" class="btn btn-off">Turn OFF</button>
+            </div>
+        
+            <!-- Частоти перевірок -->
+            <div class="form-group input-group">
+                <label for="ups_interval">UPS Check Interval (min)</label>
+                <!-- Заміна жорстких значень на змінні Jinja2 -->
+                <input type="number" id="ups_interval" name="ups_interval" value="{{ settings.ups_interval }}" min="1">
+                <button type="submit" name="set_ups_interval" value="1" class="btn">Set</button>
+            </div>
+            <div class="form-group input-group">
+                <label for="meteo_interval">Meteo Check Interval (min)</label>
+                <input type="number" id="meteo_interval" name="meteo_interval" value="{{ settings.meteo_interval }}" min="1">
+                <button type="submit" name="set_meteo_interval" value="1" class="btn">Set</button>
+            </div>
+
+            <!-- Порогові значення -->
+            <div class="form-group input-group">
+                <label for="min_temp">Min Temperature (°C)</label>
+                <input type="number" id="min_temp" name="min_temp" value="{{ settings.min_temp }}" step="0.5">
+                <button type="submit" name="set_min_temp" value="1" class="btn">Set</button>
+            </div>
+            <div class="form-group input-group">
+                <label for="max_hum">Max Humidity (%)</label>
+                <input type="number" id="max_hum" name="max_hum" value="{{ settings.max_hum }}" min="0" max="100">
+                <button type="submit" name="set_max_hum" value="1" class="btn">Set</button>
+            </div>
+            <div class="form-group input-group">
+                <label for="max_co2">Max CO2 (ppm)</label>
+                <input type="number" id="max_co2" name="max_co2" value="{{ settings.max_co2 }}" min="400" step="50">
+                <button type="submit" name="set_max_co2" value="1" class="btn">Set</button>
+            </div>
+        </form>
+
+        {% if message %}
+        <p class="success" style="color: #00ff7f; margin-top: 15px; font-weight: 600;">{{ message }}</p>
+        {% endif %}
+        {% if serial_error %}
+        <p class="error" style="color: #ff3333; margin-top: 15px; font-weight: 600;">{{ serial_error }}</p>
+        {% endif %}
+        
+        <a href="{{ url_for('menu') }}" class="btn" style="margin-top: 25px;">Back to Menu</a>
+    </div>
+</body>
+</html>
